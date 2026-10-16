@@ -31,5 +31,28 @@ public class Main {
         } catch (Exception e) {
             System.err.println("Помилка під час оформлення замовлення: " + e.getMessage());
         }
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        System.out.println("=== Тестування OCP та Патерну 'Стратегія' ===");
+
+        PaymentRequest request = new PaymentRequest(
+            "TXN-9999", 
+            new BigDecimal("200.00"), 
+            "USD", 
+            "customer_alex"
+        );
+
+        PaymentProcessor processor = new PaymentProcessor();
+
+        System.out.println("\n--- Тест 1: Credit Card ---");
+        PaymentStrategy creditCardStrategy = new CreditCardPaymentStrategy();
+        processor.processPayment(request, creditCardStrategy);
+
+        System.out.println("\n--- Тест 2: PayPal ---");
+        PaymentStrategy paypalStrategy = new PayPalPaymentStrategy();
+        processor.processPayment(request, paypalStrategy);
+
+        System.out.println("\n--- Тест 3: Crypto ---");
+        PaymentStrategy cryptoStrategy = new CryptoPaymentStrategy();
+        processor.processPayment(request, cryptoStrategy);
     }
 }
