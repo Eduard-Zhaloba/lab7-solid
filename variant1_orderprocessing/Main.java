@@ -54,5 +54,32 @@ public class Main {
         System.out.println("\n--- Тест 3: Crypto ---");
         PaymentStrategy cryptoStrategy = new CryptoPaymentStrategy();
         processor.processPayment(request, cryptoStrategy);
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+        System.out.println(" ");
+        System.out.println("\n=== Тестування Завдання 3 (Виправлення LSP через інтерфейси) ===");
+
+        StandardBankAccount regularAccount = new StandardBankAccount("ACC-101", new BigDecimal("1000.00"));
+        FixedDepositAccount depositAccount = new FixedDepositAccount("ACC-202", new BigDecimal("5000.00"), 12);
+
+        BankService bankService = new BankService();
+
+      
+        System.out.println("\n--- Тест 1: Звичайний рахунок ---");
+        System.out.println("Початковий баланс: $" + regularAccount.getBalance());
+        
+       
+        regularAccount.deposit(new BigDecimal("200.00"));
+        System.out.println("Після поповнення: $" + regularAccount.getBalance());
+
+       
+        bankService.processMonthlyFee(regularAccount, new BigDecimal("50.00"));
+
+
+       
+        System.out.println("\n--- Тест 2: Депозитний рахунок ---");
+        System.out.println("Номер депозиту: " + depositAccount.getAccountNumber());
+        System.out.println("Сума на депозиті: $" + depositAccount.getBalance());
+        System.out.println("Термін: " + depositAccount.getTermMonths() + " місяців");
+        System.out.println("\nКомісія з депозиту не може бути знята помилково — компілятор захищає код!");
     }
 }
