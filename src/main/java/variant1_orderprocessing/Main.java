@@ -54,5 +54,31 @@ public class Main {
         System.out.println("\n--- Тест 3: Crypto ---");
         PaymentStrategy cryptoStrategy = new CryptoPaymentStrategy();
         processor.processPayment(request, cryptoStrategy);
+        
+        System.out.println("\n=== Тестування Завдання 3 (LSP) ===");
+
+        StandardBankAccount regularAccount = new StandardBankAccount("ACC-101", new BigDecimal("1000.00"));
+        FixedDepositAccount depositAccount = new FixedDepositAccount("ACC-202", new BigDecimal("5000.00"), 12);
+
+        BankService bankService = new BankService();
+
+      
+        System.out.println("\n--- ╨в╨╡╤Б╤В 1: ╨Ч╨▓╨╕╤З╨░╨╣╨╜╨╕╨╣ ╤А╨░╤Е╤Г╨╜╨╛╨║ ---");
+        System.out.println("╨Я╨╛╤З╨░╤В╨║╨╛╨▓╨╕╨╣ ╨▒╨░╨╗╨░╨╜╤Б: $" + regularAccount.getBalance());
+        
+       
+        regularAccount.deposit(new BigDecimal("200.00"));
+        System.out.println("╨Я╤Ц╤Б╨╗╤П ╨┐╨╛╨┐╨╛╨▓╨╜╨╡╨╜╨╜╤П: $" + regularAccount.getBalance());
+
+       
+        bankService.processMonthlyFee(regularAccount, new BigDecimal("50.00"));
+
+
+       
+        System.out.println("\n--- ╨в╨╡╤Б╤В 2: ╨Ф╨╡╨┐╨╛╨╖╨╕╤В╨╜╨╕╨╣ ╤А╨░╤Е╤Г╨╜╨╛╨║ ---");
+        System.out.println("╨Э╨╛╨╝╨╡╤А ╨┤╨╡╨┐╨╛╨╖╨╕╤В╤Г: " + depositAccount.getAccountNumber());
+        System.out.println("╨б╤Г╨╝╨░ ╨╜╨░ ╨┤╨╡╨┐╨╛╨╖╨╕╤В╤Ц: $" + depositAccount.getBalance());
+        System.out.println("╨в╨╡╤А╨╝╤Ц╨╜: " + depositAccount.getTermMonths() + " ╨╝╤Ц╤Б╤П╤Ж╤Ц╨▓");
+        System.out.println("\n╨Ъ╨╛╨╝╤Ц╤Б╤Ц╤П ╨╖ ╨┤╨╡╨┐╨╛╨╖╨╕╤В╤Г ╨╜╨╡ ╨╝╨╛╨╢╨╡ ╨▒╤Г╤В╨╕ ╨╖╨╜╤П╤В╨░ ╨┐╨╛╨╝╨╕╨╗╨║╨╛╨▓╨╛ тАФ ╨║╨╛╨╝╨┐╤Ц╨╗╤П╤В╨╛╤А ╨╖╨░╤Е╨╕╤Й╨░╤Ф ╨║╨╛╨┤!");
     }
 }
